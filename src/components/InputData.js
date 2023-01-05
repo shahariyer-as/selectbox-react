@@ -21,9 +21,6 @@ const InputData = () => {
 
     setSelectors([...selectors, data]);
     window.alert("submitted");
-    this.setState({
-      data: "",
-    });
     setName("");
     setSelects("");
     setCheckbox(false);

@@ -1,5 +1,6 @@
 import React from "react";
 import useStore from "../../hooks/useStore";
+import ShowData from "./ShowData";
 
 const MyData = () => {
   const [selectors, setSelectors] = useStore();
@@ -9,6 +10,7 @@ const MyData = () => {
     });
     setSelectors(filterS);
   };
+  // console.log(selectors);
   return (
     <div className="mt-5">
       {selectors.length < 1 && (
@@ -17,37 +19,23 @@ const MyData = () => {
       <h3 className="text-danger">Total submit {selectors.length}</h3>
 
       <div className="view-container">
-        {selectors.length > 0 && (
-          <>
-            <div className="table-responsive">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Select Item</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    (selectors.map = (s, index) => (
-                      <tr key={index}>
-                        <td>{s.name}</td>
-                        <td>{s.select}</td>
-                        <td
-                          className="delete-btn"
-                          onClick={() => deleteData(s.name)}
-                        >
-                          x
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </>
-        )}
+        <div className="table-responsive">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Select Item</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ShowData
+                selectors={selectors}
+                deleteData={deleteData}
+              ></ShowData>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
