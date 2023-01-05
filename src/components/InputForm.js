@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import useGetAllSelectors from "../hooks/useGetAllSelectors";
 
 const InputForm = () => {
   const [checkbox, setCheckbox] = useState(false);
+  const [selectors, setSelectors] = useGetAllSelectors();
   const {
     register,
     formState: { errors },
@@ -14,15 +16,15 @@ const InputForm = () => {
     reset();
   };
   return (
-    <div>
+    <div className="container p-5">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-3 mx-auto w-25">
+        <div className="mb-3 mx-auto w-50">
           <label className="form-label">
-            <span className="label-text">Name</span>
+            <span className="label-text"> Your Name</span>
           </label>
           <input
             type="name"
-            placeholder="Your Name"
+            placeholder="Name"
             className=" form-control"
             {...register("name", {
               required: {
@@ -40,35 +42,44 @@ const InputForm = () => {
           </label>
         </div>
 
-        <div className="mb-3 mx-auto w-25">
+        <div className="mb-3 mx-auto w-50">
           <label className="label">
-            <span className="label-text">Specialty</span>
+            <span className="label-text">Selectors</span>
           </label>
-          <select {...register("specialty")} className=" form-control">
-            <option value="">on oafs</option>
-            {/* {services.map((service) => (
-              <option key={service._id} value={service.name}>
-                {service.name}
+          <select
+            multiple
+            {...register("selectors", {
+              required: {
+                value: true,
+                message: "selectors is Required",
+              },
+            })}
+            className=" form-select"
+            aria-label=" select example"
+          >
+            {selectors.map((s) => (
+              <option key={s._id} value={s.selector}>
+                {s.selector}
               </option>
-            ))} */}
+            ))}
           </select>
+          <label className="label">
+            {errors.selectors?.type === "required" && (
+              <span className="label-text-alt text-danger">
+                {errors.selectors?.message}
+              </span>
+            )}
+          </label>
         </div>
-        <div className="mb-3 mx-auto w-25">
+        <div className="mb-3 mx-auto w-50">
           <input
-            {...register("checkbox")}
+            {...register("terms")}
             type="checkbox"
             value="accepts"
             onChange={(e) => setCheckbox(e.target.checked)}
           />
           <label className="form-label">
             <span className="label-text p-2"> Agree to terms</span>
-          </label>
-          <label className="label">
-            {errors.name?.type === "required" && (
-              <span className="label-text-alt text-danger">
-                {errors.checkbox?.message}
-              </span>
-            )}
           </label>
         </div>
         <input
