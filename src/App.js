@@ -11,8 +11,7 @@ function App() {
     <div className="App">
       <Home></Home>
       <Routes>
-        {/* <Route path="" element={<InputForm />}></Route>
-        <Route path="input" element={<InputForm />}></Route> */}
+        <Route path="" element={<InputData />}></Route>
         <Route path="input" element={<InputData />}></Route>
         <Route path="data" element={<MyData />}></Route>
       </Routes>
