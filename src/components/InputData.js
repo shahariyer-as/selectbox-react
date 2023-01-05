@@ -59,7 +59,7 @@ const InputData = () => {
           <select
             multiple
             required
-            onChange={(e) => setSelects(e.target.slot.value)}
+            onChange={(e) => setSelects(e.target.value)}
             className="mt-3 form-select mx-auto w-75"
             aria-label=" select example"
           >
