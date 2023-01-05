@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 const useGetAllSelectors = () => {
-  const [selectors, setSelectors] = useState([]);
+  const [inputSelect, setInputSelect] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/selectors")
       .then((res) => res.json())
-      .then((data) => setSelectors(data));
+      .then((data) => setInputSelect(data));
   }, []);
-  return [selectors, setSelectors];
+  return [inputSelect, setInputSelect];
 };
 export default useGetAllSelectors;
